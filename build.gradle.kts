@@ -1,6 +1,11 @@
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+
 plugins {
     val kotlinVersion = "1.5.0"
     kotlin("jvm") version kotlinVersion
+    kotlin("plugin.spring") version kotlinVersion
+    kotlin("plugin.allopen") version kotlinVersion
+    kotlin("plugin.jpa") version kotlinVersion
     id("org.openapi.generator") version "5.1.1"
     id("org.springframework.boot") version "2.3.12.RELEASE"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
@@ -33,6 +38,15 @@ dependencies {
     // Spring Boot dependencies
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.data:spring-data-jpa")
+
+    // Swagger generated code
+    //implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
+    //implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("io.swagger:swagger-annotations:1.6.2")
+    implementation("javax.validation:validation-api")
+    implementation("javax.annotation:javax.annotation-api:1.3.2")
 
     // Logging
     implementation("io.github.microutils:kotlin-logging-jvm:${Version.kotlinLoggingJvm}")
@@ -65,10 +79,16 @@ tasks.jacocoTestReport {
 }
 
 openApiGenerate {
-    generatorName.set("kotlin")
+    generatorName.set("jaxrs-spec")
     inputSpec.set("src/main/resources/petstore.yml")
     outputDir.set("$buildDir/generated")
     configFile.set("src/main/resources/api-config.json")
+}
+
+java {
+    sourceSets["main"].apply {
+        java.srcDir("$buildDir/generated/")
+    }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
