@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
-
 plugins {
     val kotlinVersion = "1.5.0"
     kotlin("jvm") version kotlinVersion
@@ -38,15 +36,17 @@ dependencies {
     // Spring Boot dependencies
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.data:spring-data-jpa")
+    //implementation("org.springframework.data:spring-data-jpa")
+    //implementation("org.springframework.boot:spring-boot-starter-jersey")
 
     // Swagger generated code
     //implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
     //implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("io.swagger:swagger-annotations:1.6.2")
-    implementation("javax.validation:validation-api")
-    implementation("javax.annotation:javax.annotation-api:1.3.2")
+    //implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    //implementation("io.swagger:swagger-annotations:1.6.2")
+    implementation("io.swagger:swagger-jersey2-jaxrs:1.6.2")
+    //implementation("javax.validation:validation-api")
+    //implementation("javax.annotation:javax.annotation-api:1.3.2")
 
     // Logging
     implementation("io.github.microutils:kotlin-logging-jvm:${Version.kotlinLoggingJvm}")
@@ -85,11 +85,24 @@ openApiGenerate {
     configFile.set("src/main/resources/api-config.json")
 }
 
-java {
-    sourceSets["main"].apply {
-        java.srcDir("$buildDir/generated/")
-    }
-}
+java.sourceSets["main"].java.srcDir("$buildDir/generated/src/gen/java")
+
+// Other way to add the java generated class to the source set
+
+//configure<SourceSetContainer> {
+//    named("main") {
+//        java.srcDir("$buildDir/generated/src/gen/java")
+//    }
+//}
+
+//sourceSets {
+//    val main by getting
+//    main.java.srcDir("$buildDir/generated/src/gen/java")
+//}
+
+//sourceSets["main"].withConvention(conventionType = org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {
+//    kotlin.srcDir("$buildDir/generated/src/gen/java")
+//}
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     dependsOn("openApiGenerate")

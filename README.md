@@ -59,9 +59,7 @@ openApiGenerate {
 }
 
 // Add the generated sources to your project
-sourceSets["main"].withConvention(conventionType = KotlinSourceSet::class) {
-    kotlin.srcDir("$buildDir/generated/")
-}
+java.sourceSets["main"].java.srcDir("$buildDir/generated/src/gen/java")
 ```
 
 The api-config can also be added directly within the `openApiGenerate` gradle task.
