@@ -19,8 +19,8 @@ Then run it using your swagger yaml file and if you have your config file. You c
 (Find the configuration for [java](https://openapi-generator.tech/docs/generators/java/) and [kotlin](https://openapi-generator.tech/docs/generators/kotlin/))
 
 ```bash
-openapi-generator generate -i src/main/resources/petstore.yml -g kotlin-spring  --config src/main/resources/api-config.json
-# openapi-generator generate -i ../src/main/resources/petstore.yml -g kotlin-spring  --config ../src/main/resources/api-config.json --global-property apiTests=true,modelTests=true,apiDocs=true,modelDocs=true
+openapi-generator generate -i src/main/resources/swagger/petstore.yml -g kotlin-spring  --config src/main/resources/api-config.json
+# openapi-generator generate -i ../src/main/resources/swagger/petstore.yml -g kotlin-spring  --config ../src/main/resources/api-config.json --global-property apiTests=true,modelTests=true,apiDocs=true,modelDocs=true
 ```
 
 This will create the project with a `build.gradle.kts` (and also a `pom.xml` for maven).

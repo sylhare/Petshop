@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  description: >-
+    To test multi yml file swagger generation
+  version: 1.0.0
+  title: Petshop
+
+paths:
+  /shop:
+    post:
+      tags:
+        - shop
+      summary: Do nothing really
+      description: ''
+      operationId: petshopMethod
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '405':
+          description: Invalid input
+      requestBody:
+        $ref: '#/components/requestBodies/Pet'
