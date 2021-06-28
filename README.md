@@ -15,14 +15,23 @@ You need to install:
 brew install openapi-generator
 ```
 
-Then run it using your swagger yaml file and if you have your config file.
+Then run it using your swagger yaml file and if you have your config file. You can also specify some [global properties](https://openapi-generator.tech/docs/globals/#available-global-properties) as key=value pairs.
 (Find the configuration for [java](https://openapi-generator.tech/docs/generators/java/) and [kotlin](https://openapi-generator.tech/docs/generators/kotlin/))
 
 ```bash
 openapi-generator generate -i src/main/resources/petstore.yml -g kotlin-spring  --config src/main/resources/api-config.json
+# openapi-generator generate -i ../src/main/resources/petstore.yml -g kotlin-spring  --config ../src/main/resources/api-config.json --global-property apiTests=true,modelTests=true,apiDocs=true,modelDocs=true
 ```
 
 This will create the project with a `build.gradle.kts` (and also a `pom.xml` for maven).
+
+For gradle, the wrapper won't be created automatically, you can do so by running:
+
+```bash
+gradle wrapper --gradle-version 7.1 --distribution-type all
+./gradlew assemble
+```
+
 Then you need to create the `PetApiServiceImpl` that implements `PetApiService` and add it to the `PetApi`:
 
 ```kotlin
@@ -65,5 +74,5 @@ java.sourceSets["main"].java.srcDir("$buildDir/generated/src/gen/java")
 The api-config can also be added directly within the `openApiGenerate` gradle task.
 The `inputSpec` is the swagger file that the code will be generated from.
 
-We use `jaxrs-spec` instead of `kotlin-spring` to customize it. 
-
+We use [`jaxrs-spec`](https://en.wikipedia.org/wiki/Jakarta_RESTful_Web_Services) instead of `kotlin-spring` to customize it.
+Since the JAX-RS provides annotations and interfaces that can be implemented to create a Restful API.

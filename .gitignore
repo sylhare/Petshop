@@ -28,5 +28,4 @@ hs_err_pid*
 
 # Custom
 .idea/**
-.openapi-generator/**
-.openapi-generator-ignore
+**/.openapi-generator/**

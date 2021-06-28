@@ -83,6 +83,14 @@ openApiGenerate {
     inputSpec.set("src/main/resources/petstore.yml")
     outputDir.set("$buildDir/generated")
     configFile.set("src/main/resources/api-config.json")
+
+    globalProperties.set( mapOf(
+        Pair("apis", ""), //no value or comma-separated api names
+        Pair("apiTests", "false"),
+        Pair("models", ""), //no value or comma-separated api names
+        Pair("modelTests", "false"),
+        Pair("invoker", "false")
+    ))
 }
 
 java.sourceSets["main"].java.srcDir("$buildDir/generated/src/gen/java")
