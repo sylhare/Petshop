@@ -32,6 +32,7 @@ import kotlin.collections.Map
 @RequestMapping("\${api.base-path:/v2}")
 interface PetApi {
 
+    val service: PetApiService
 
     @PostMapping(
             value = ["/pet"],
