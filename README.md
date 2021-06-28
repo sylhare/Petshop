@@ -28,19 +28,26 @@ This will create the project with a `build.gradle.kts` (and also a `pom.xml` for
 For gradle, the wrapper won't be created automatically, you can do so by running:
 
 ```bash
-gradle wrapper --gradle-version 7.1 --distribution-type all
+gradle wrapper --gradle-version 4.8 --distribution-type all
 ./gradlew assemble
 ```
 
-Then you need to create the `PetApiServiceImpl` that implements `PetApiService` and add it to the `PetApi`:
+The syntax used in the generated build.gradle.kts is rather old and might not be compatible with gradle 7.0+.
+Then you need to create the `PetApiServiceImpl` that implements `PetApiService` and add it to the `PetApiController` implementing `PetApi`:
 
 ```kotlin
-@Autowire
-private lateinit var PetApiService service
+@RestController
+class PetApiController : PetApi {
+
+    @Autowired
+    override lateinit var service: PetApiServiceImpl
+}
 ```
 
 This service is where you can start adding your own implementation of the Petshop.
 (Because the swagger yaml only generate the endpoints, it's not that magical!)
+
+> The generated code is a bit lacking and will require some changes to be working and up to date.
 
 To build the project using gradle, run:
 
