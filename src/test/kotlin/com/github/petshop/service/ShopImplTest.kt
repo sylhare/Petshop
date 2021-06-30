@@ -52,7 +52,7 @@ internal class ShopImplTest {
             post("/shop")
                 .content(petPayload)
                 .contentType(MediaType.APPLICATION_JSON)
-                //.accept(MediaType.APPLICATION_JSON) // If there is xml and json offered
+                .accept(MediaType.APPLICATION_JSON) // If there is xml and json offered
         )
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
