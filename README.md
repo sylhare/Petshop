@@ -68,18 +68,15 @@ plugins {
 }
 
 openApiGenerate {
-    generatorName.set("jaxrs-spec")
+    generatorName.set("spring")
     inputSpec.set("src/main/resources/petstore.yml")
     outputDir.set("$buildDir/generated")
     configFile.set("src/main/resources/api-config.json")
 }
 
 // Add the generated sources to your project
-java.sourceSets["main"].java.srcDir("$buildDir/generated/src/gen/java")
+java.sourceSets["main"].java.srcDir("$buildDir/generated/src/main/java")
 ```
 
 The api-config can also be added directly within the `openApiGenerate` gradle task.
 The `inputSpec` is the swagger file that the code will be generated from.
-
-We use [`jaxrs-spec`](https://en.wikipedia.org/wiki/Jakarta_RESTful_Web_Services) instead of `kotlin-spring` to customize it.
-Since the JAX-RS provides annotations and interfaces that can be implemented to create a Restful API.

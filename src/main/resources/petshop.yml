@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info:
+  description: Petshop to test yml file generation
+  version: 1.0.0
+  title: Petshop example
+
+paths:
+  /petshop: # That will be the name of the api -> PetshopApi
+    get:   # Type of request: GET
+      tags:
+        - shop
+      summary: Do nothing really
+      description: ''
+      operationId: petshopMethod # That will be the method to add the logic
+      responses:                 # ApiResponse documentation
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        '405':
+          description: Invalid input

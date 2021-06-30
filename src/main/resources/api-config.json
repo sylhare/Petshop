@@ -6,5 +6,6 @@
   "useBeanValidation": true,
   "interfaceOnly": true,
   "hideGenerationTimestamp": true,
-  "serviceInterface": true
+  "serviceInterface": true,
+  "openApiNullable": false
 }

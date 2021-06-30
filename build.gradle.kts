@@ -40,6 +40,8 @@ dependencies {
 
     // Swagger generated code
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("com.fasterxml.jackson.core:jackson-core")
+    implementation("io.springfox:springfox-boot-starter:3.0.0")
     implementation("io.swagger:swagger-jersey2-jaxrs:1.6.2")
 
     // Logging
@@ -47,10 +49,6 @@ dependencies {
 
     // Tests
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(module = "junit")
-        exclude(module = "junit-vintage-engine")
-    }
-    testImplementation("org.springframework.security:spring-security-test") {
         exclude(module = "junit")
         exclude(module = "junit-vintage-engine")
     }
@@ -73,17 +71,25 @@ tasks.jacocoTestReport {
 }
 
 tasks.create<org.openapitools.generator.gradle.plugin.tasks.GenerateTask> ("external") {
-    generatorName.set("jaxrs-spec")
-    inputSpec.set("${rootDir}/src/main/resources/external.yml")
+    dependsOn("openApiGenerate")
+    generatorName.set("spring")
+    inputSpec.set("$rootDir/src/main/resources/external.yml")
     outputDir.set("$buildDir/generated/")
-    templateDir.set("${rootDir}/src/main/resources/swagger/")
-    configFile.set("src/main/resources/api-config.json")
+    templateDir.set("$rootDir/src/main/resources/swagger/")
+    configFile.set("$rootDir/src/main/resources/api-config.json")
+}
+
+tasks.create<org.openapitools.generator.gradle.plugin.tasks.GenerateTask> ("petshop") {
+    generatorName.set("spring")
+    inputSpec.set("$rootDir/src/main/resources/petshop.yml")
+    outputDir.set("$buildDir/generated/")
+    configFile.set("$rootDir/src/main/resources/api-config.json")
 }
 
 openApiMerger {
-    inputDirectory.set(file("${rootDir}/src/main/resources/swagger/"))
+    inputDirectory.set(file("$rootDir/src/main/resources/swagger/"))
     output {
-        directory.set(file("${buildDir}/generated/"))
+        directory.set(file("$buildDir/generated/"))
         fileName.set("openapi")
         fileExtension.set("yaml")
     }
@@ -99,10 +105,10 @@ openApiMerger {
 tasks.getByName("openApiGenerate").dependsOn("mergeOpenApiFiles")
 
 openApiGenerate {
-    generatorName.set("jaxrs-spec")
-    inputSpec.set("${buildDir}/generated/openapi.yaml")
+    generatorName.set("spring")
+    inputSpec.set("$buildDir/generated/openapi.yaml")
     outputDir.set("$buildDir/generated/")
-    configFile.set("src/main/resources/api-config.json")
+    configFile.set("$rootDir/src/main/resources/api-config.json")
 
     globalProperties.set( mapOf(
         Pair("apis", ""), //no value or comma-separated api names
@@ -113,7 +119,8 @@ openApiGenerate {
     ))
 }
 
-java.sourceSets["main"].java.srcDir("$buildDir/generated/src/gen/java")
+//java.sourceSets["main"].java.srcDir("$buildDir/generated/src/gen/java") //for jaxrs-spec
+java.sourceSets["main"].java.srcDir("$buildDir/generated/src/main/java")
 
 // Other way to add the java generated class to the source set
 
@@ -133,7 +140,8 @@ java.sourceSets["main"].java.srcDir("$buildDir/generated/src/gen/java")
 //}
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    dependsOn("openApiGenerate", "external")
+    dependsOn("openApiGenerate", "external", "petshop")
+    //dependsOn( "petshop")
     kotlinOptions.jvmTarget = "11"
 }
 
