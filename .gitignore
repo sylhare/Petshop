@@ -29,7 +29,6 @@ hs_err_pid*
 # Custom
 .idea/**
 **/.openapi-generator/**
-**/pom.xml
 generated/.gradle/**
 generated/build/**
 generated/.idea/**
