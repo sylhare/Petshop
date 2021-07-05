@@ -31,7 +31,7 @@ import kotlin.collections.Map
 @RequestMapping("\${api.base-path:/v2}")
 interface UserApi {
 
-    val service: UserApiService
+    val service: UserApiService // Had to be added for the generated code to compile
 
     @PostMapping(
             value = ["/user"],

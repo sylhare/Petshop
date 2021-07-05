@@ -31,7 +31,7 @@ import kotlin.collections.Map
 @RequestMapping("\${api.base-path:/v2}")
 interface StoreApi {
 
-    val service: StoreApiService
+    val service: StoreApiService // Had to be added for the generated code to compile
 
     @DeleteMapping(
             value = ["/store/order/{orderId}"]

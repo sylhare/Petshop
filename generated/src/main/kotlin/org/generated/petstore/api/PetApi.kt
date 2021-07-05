@@ -32,7 +32,7 @@ import kotlin.collections.Map
 @RequestMapping("\${api.base-path:/v2}")
 interface PetApi {
 
-    val service: PetApiService
+    val service: PetApiService // Had to be added for the generated code to compile
 
     @PostMapping(
             value = ["/pet"],
@@ -41,7 +41,7 @@ interface PetApi {
     )
     fun addPet( @Valid @RequestBody pet: Pet
 ): ResponseEntity<Pet> {
-        return ResponseEntity(service.addPet(pet), HttpStatus.valueOf(200))
+        return ResponseEntity(service.addPet(pet), HttpStatus.valueOf(200)) // Always return 200 when `405` is defined in the swagger
     }
 
 
