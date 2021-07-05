@@ -40,9 +40,8 @@ dependencies {
 
     // Swagger generated code
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.fasterxml.jackson.core:jackson-core")
+    implementation("javax.validation:validation-api:2.0.0.Final")
     implementation("io.springfox:springfox-boot-starter:3.0.0")
-    implementation("io.swagger:swagger-jersey2-jaxrs:1.6.2")
 
     // Logging
     implementation("io.github.microutils:kotlin-logging-jvm:${Version.kotlinLoggingJvm}")
@@ -126,17 +125,17 @@ java.sourceSets["main"].java.srcDir("$buildDir/generated/src/main/java")
 
 //configure<SourceSetContainer> {
 //    named("main") {
-//        java.srcDir("$buildDir/generated/src/gen/java")
+//        java.srcDir("$buildDir/generated/src/main/java")
 //    }
 //}
 
 //sourceSets {
 //    val main by getting
-//    main.java.srcDir("$buildDir/generated/src/gen/java")
+//    main.java.srcDir("$buildDir/generated/src/main/java")
 //}
 
 //sourceSets["main"].withConvention(conventionType = org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {
-//    kotlin.srcDir("$buildDir/generated/src/gen/java")
+//    kotlin.srcDir("$buildDir/generated/src/main/java")
 //}
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
