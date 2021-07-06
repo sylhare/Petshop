@@ -1,6 +1,6 @@
 # openAPIPetstore
 
-> The `spring-kotlin` generator as of 5.1.1 is a starting point that needs to be updated in order to work. Prefer `spring` generator when working with spring (in Kotlin or Java)
+Generated with `"serviceInterface": true`.
 
 This Kotlin based [Spring Boot](https://spring.io/projects/spring-boot) application has been generated using the [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator).
 

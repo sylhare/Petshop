@@ -109,19 +109,27 @@ openApiGenerate {
     outputDir.set("$buildDir/generated/")
     configFile.set("$rootDir/src/main/resources/api-config.json")
 
-    globalProperties.set( mapOf(
-        Pair("apis", ""), //no value or comma-separated api names
-        Pair("apiTests", "false"),
-        Pair("models", ""), //no value or comma-separated api names
-        Pair("modelTests", "false"),
-        Pair("invoker", "false")
-    ))
+/* Manually set configs */
+//    configOptions.set(mapOf(
+//        Pair("openApiNullable", "false")
+//    ))
+//    apiPackage.set("org.generated.petstore.api")
+//    modelPackage.set("org.generated.petstore.model")
+
+/* Add global properties */
+//    globalProperties.set(mapOf(
+//        Pair("apis", ""), //no value or comma-separated api names
+//        Pair("apiTests", "false"),
+//        Pair("models", ""), //no value or comma-separated api names
+//        Pair("modelTests", "false"),
+//        Pair("invoker", "false")
+//    ))
 }
 
 //java.sourceSets["main"].java.srcDir("$buildDir/generated/src/gen/java") //for jaxrs-spec
 java.sourceSets["main"].java.srcDir("$buildDir/generated/src/main/java")
 
-// Other way to add the java generated class to the source set
+/* Other way to add the java generated class to the source set */
 
 //configure<SourceSetContainer> {
 //    named("main") {

@@ -31,16 +31,16 @@ internal class ShopImplTest {
         it.tags = listOf()
         it.category = Category().also { cat ->
             cat.id = 1L
-            cat.name = "categrory"
+            cat.name = "category-lolilol"
         }
     }
 
-    private val petPayload = "{\"id\":1,\"category\":{\"id\":1,\"name\":\"categrory\"},\"name\":\"example\",\"photoUrls\":[],\"tags\":[],\"status\":\"available\"}"
+    private val petPayload = "{\"id\":1,\"category\":{\"id\":1,\"name\":\"category-lolilol\"},\"name\":\"example\",\"photoUrls\":[],\"tags\":[],\"status\":\"available\"}"
 
     @Test
     fun petTest() {
         assertEquals(
-            "{\"id\":1,\"category\":{\"id\":1,\"name\":\"categrory\"},\"name\":\"example\",\"photoUrls\":[],\"tags\":[],\"status\":\"available\"}",
+            "{\"id\":1,\"category\":{\"id\":1,\"name\":\"category-lolilol\"},\"name\":\"example\",\"photoUrls\":[],\"tags\":[],\"status\":\"available\"}",
             objectMapper.writeValueAsString(pet)
         )
 
