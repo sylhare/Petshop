@@ -30,10 +30,5 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(module = "junit")
-    }
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-api")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

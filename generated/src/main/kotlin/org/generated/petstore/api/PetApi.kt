@@ -34,6 +34,9 @@ interface PetApi {
 
     val service: PetApiService // Had to be added for the generated code to compile
 
+    /**
+     * Always return 200 by default instead of unimplemented.
+     */
     @PostMapping(
             value = ["/pet"],
             produces = ["application/xml", "application/json"],
@@ -41,7 +44,7 @@ interface PetApi {
     )
     fun addPet( @Valid @RequestBody pet: Pet
 ): ResponseEntity<Pet> {
-        return ResponseEntity(service.addPet(pet), HttpStatus.valueOf(200)) // Always return 200 when `405` is defined in the swagger
+        return ResponseEntity(service.addPet(pet), HttpStatus.valueOf(200))
     }
 
 

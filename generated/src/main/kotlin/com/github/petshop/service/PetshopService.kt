@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 @Service
 class PetshopService : PetApiService {
     override fun addPet(pet: Pet): Pet {
-        TODO("Not yet implemented")
+        return pet
     }
 
     override fun deletePet(petId: Long, apiKey: String?) {
