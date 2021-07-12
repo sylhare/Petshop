@@ -69,7 +69,7 @@ tasks.jacocoTestReport {
     }
 }
 
-tasks.create<org.openapitools.generator.gradle.plugin.tasks.GenerateTask> ("external") {
+tasks.create<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("external") {
     dependsOn("openApiGenerate")
     generatorName.set("spring")
     inputSpec.set("$rootDir/src/main/resources/external.yml")
@@ -78,7 +78,8 @@ tasks.create<org.openapitools.generator.gradle.plugin.tasks.GenerateTask> ("exte
     configFile.set("$rootDir/src/main/resources/api-config.json")
 }
 
-tasks.create<org.openapitools.generator.gradle.plugin.tasks.GenerateTask> ("petshop") {
+tasks.create<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("petshop") {
+    dependsOn("external")
     generatorName.set("spring")
     inputSpec.set("$rootDir/src/main/resources/petshop.yml")
     outputDir.set("$buildDir/generated/")
@@ -147,14 +148,14 @@ java.sourceSets["main"].java.srcDir("$buildDir/generated/src/main/java")
 //}
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    dependsOn("openApiGenerate", "external", "petshop")
+    dependsOn("petshop")
     //dependsOn( "petshop")
     kotlinOptions.jvmTarget = "11"
 }
 
-tasks.create<Copy>("copy") {
+tasks.create<Copy>("copy") { // Copy from "/path/to/source/configuration" to "/$buildDir/openapi/"
     into("$buildDir/")
-    into("swagger/api/") {
-        from("$buildDir/generated/openapi/")
+    into("openapi/") {
+        from("/path/to/source/configuration")
     }
 }
