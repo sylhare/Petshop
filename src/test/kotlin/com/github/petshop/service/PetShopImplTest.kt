@@ -34,6 +34,12 @@ internal class PetShopImplTest {
     }
 
     @Test
+    fun getFancyPetshopTest() {
+        mvc.perform(get("/fancy/petshop").headers(jsonHeader()))
+            .andExpect(status().isOk)
+    }
+
+    @Test
     fun postPetshopFail() {
         mvc.perform(post("/petshop"))
             .andExpect(status().is4xxClientError)
