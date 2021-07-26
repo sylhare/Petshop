@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: Petshop to test yml file generation
-  version: 1.0.0
+  version: 1.0.1
   title: Petshop example
 
 paths:
@@ -9,8 +9,8 @@ paths:
     get:   # Type of request: GET
       tags:
         - shop
-      summary: Do nothing really
-      description: ''
+      summary: This petshop do nothing really
+      description: "This is a description, for the UI but will appear also as java doc"
       operationId: petshopMethod # That will be the method to add the logic
       responses:                 # ApiResponse documentation
         '200':
